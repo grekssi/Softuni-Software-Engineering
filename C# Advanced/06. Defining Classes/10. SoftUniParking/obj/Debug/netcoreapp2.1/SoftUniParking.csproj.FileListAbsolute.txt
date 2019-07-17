@@ -1,0 +1,11 @@
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\bin\Debug\netcoreapp2.1\SoftUniParking.deps.json
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\bin\Debug\netcoreapp2.1\SoftUniParking.runtimeconfig.json
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\bin\Debug\netcoreapp2.1\SoftUniParking.runtimeconfig.dev.json
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\bin\Debug\netcoreapp2.1\SoftUniParking.dll
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\bin\Debug\netcoreapp2.1\SoftUniParking.pdb
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.csprojAssemblyReference.cache
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.csproj.CoreCompileInputs.cache
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.AssemblyInfoInputs.cache
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.AssemblyInfo.cs
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.dll
+C:\Users\bedob\Desktop\10. SoftUni Parking_Скелет\SoftUniParking\obj\Debug\netcoreapp2.1\SoftUniParking.pdb

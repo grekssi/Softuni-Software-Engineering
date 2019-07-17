@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Point in Rectangle", "02. Point in Rectangle\02. Point in Rectangle.csproj", "{A06637B1-DC44-44C4-A865-4CAA394094F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A06637B1-DC44-44C4-A865-4CAA394094F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06637B1-DC44-44C4-A865-4CAA394094F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06637B1-DC44-44C4-A865-4CAA394094F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06637B1-DC44-44C4-A865-4CAA394094F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6247382-7649-47B8-A608-6665F19B9FCD}
+	EndGlobalSection
+EndGlobal

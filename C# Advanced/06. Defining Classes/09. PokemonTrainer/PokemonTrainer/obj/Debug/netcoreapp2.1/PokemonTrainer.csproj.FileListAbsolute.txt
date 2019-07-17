@@ -1,0 +1,11 @@
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\bin\Debug\netcoreapp2.1\PokemonTrainer.deps.json
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\bin\Debug\netcoreapp2.1\PokemonTrainer.runtimeconfig.json
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\bin\Debug\netcoreapp2.1\PokemonTrainer.runtimeconfig.dev.json
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\bin\Debug\netcoreapp2.1\PokemonTrainer.dll
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\bin\Debug\netcoreapp2.1\PokemonTrainer.pdb
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.csprojAssemblyReference.cache
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.csproj.CoreCompileInputs.cache
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.AssemblyInfoInputs.cache
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.AssemblyInfo.cs
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.dll
+C:\Users\bedob\source\repos\PokemonTrainer\PokemonTrainer\obj\Debug\netcoreapp2.1\PokemonTrainer.pdb

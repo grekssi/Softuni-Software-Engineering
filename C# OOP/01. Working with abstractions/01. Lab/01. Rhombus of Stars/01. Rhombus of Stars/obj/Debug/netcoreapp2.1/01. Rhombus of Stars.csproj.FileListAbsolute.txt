@@ -1,0 +1,11 @@
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.csproj.CoreCompileInputs.cache
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.AssemblyInfoInputs.cache
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.AssemblyInfo.cs
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\bin\Debug\netcoreapp2.1\01. Rhombus of Stars.deps.json
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\bin\Debug\netcoreapp2.1\01. Rhombus of Stars.runtimeconfig.json
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\bin\Debug\netcoreapp2.1\01. Rhombus of Stars.runtimeconfig.dev.json
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\bin\Debug\netcoreapp2.1\01. Rhombus of Stars.dll
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\bin\Debug\netcoreapp2.1\01. Rhombus of Stars.pdb
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.dll
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.pdb
+C:\Users\bedob\Desktop\github\Softuni-Software-Engireering\C# OOP\01. Working with abstractions\01. Lab\01. Rhombus of Stars\01. Rhombus of Stars\obj\Debug\netcoreapp2.1\01. Rhombus of Stars.csprojAssemblyReference.cache
