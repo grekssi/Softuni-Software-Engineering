@@ -17,7 +17,7 @@ namespace SoftUniRestaurant.Models.Tables.Contracts
         private decimal pricePerPerson;
         private bool isReserved;
         private decimal price;
-        protected Table(int tableNumber, int capacity, decimal pricePerPerson)
+        protected Table(int tableNumber, decimal pricePerPerson, int capacity)
         {
             this.TableNumber = tableNumber;
             this.Capacity = capacity;
@@ -39,7 +39,7 @@ namespace SoftUniRestaurant.Models.Tables.Contracts
             get => this.capacity;
             set
             {
-                if (value == 0)
+                if (value <= 0)
                 {
                     throw new ArgumentException("Capacity has to be greater than 0");
                 }
@@ -70,12 +70,8 @@ namespace SoftUniRestaurant.Models.Tables.Contracts
             get => this.isReserved;
             set => this.isReserved = value;
         }
-        public decimal Price
-        {
-            get => this.price;
-            set => this.price = value;
-        }
 
+        public decimal Price => this.numberOfPeople * this.pricePerPerson;
         public void Reserve(int numberOfPeople)
         {
             this.IsReserved = true;
@@ -94,7 +90,7 @@ namespace SoftUniRestaurant.Models.Tables.Contracts
 
         public decimal GetBill()
         {
-            decimal sum = this.drinkOrders.Sum(x => x.Price) + this.foodOrders.Sum(x => x.Price);
+            decimal sum = (this.drinkOrders.Sum(x => x.Price) + this.foodOrders.Sum(x => x.Price)) + this.Price;
             return sum;
         }
 

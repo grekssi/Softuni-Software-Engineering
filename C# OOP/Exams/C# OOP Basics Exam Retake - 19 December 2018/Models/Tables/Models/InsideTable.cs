@@ -9,7 +9,7 @@ namespace SoftUniRestaurant.Models.Tables.Models
     {
         private const decimal InitialPricePerPerson = 2.50m;
         public InsideTable(int tableNumber, int capacity) 
-            : base(tableNumber, capacity, InitialPricePerPerson)
+            : base(tableNumber, InitialPricePerPerson, capacity)
         {
         }
     }
