@@ -1,175 +1,152 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Service.Tests
 {
     public class DeviceTests
     {
-        private const string make = "Asus";
-        private Laptop laptop;
-        private PC pc;
-        private Phone phone;
-
+        private Device testLaptop;
+        private Device testPc;
+        private Device testPhone;
+        private Part testPcPart;
+        private Part testLaptopPart;
+        private Part testPhonePart;
         [SetUp]
         public void Setup()
         {
-           this.laptop = new Laptop(make);
-           this.pc = new PC(make);
-           this.phone = new Phone(make);
+            this.testLaptop = new Laptop("Asus");
+            this.testPc = new PC("Zen");
+            this.testPhone = new Phone("Iphone");
+
+            this.testLaptopPart = new LaptopPart("Motherboard", 50);
+            this.testPcPart = new PCPart("CPU", 130);
+            this.testPhonePart = new PhonePart("Camera", 30);
         }
 
         [Test]
         public void Test_Constructor()
         {
-            Assert.AreEqual("Asus", laptop.Make);
-            Assert.AreEqual("Asus", pc.Make);
-            Assert.AreEqual("Asus", phone.Make);
-            Assert.NotNull(laptop.Parts);
-            Assert.NotNull(pc.Parts);
-            Assert.NotNull(phone.Parts);
+            Assert.NotNull(testLaptop.Parts);
+            Assert.NotNull(testPc.Parts);
+            Assert.NotNull(testPhone.Parts);
+
+            Assert.AreEqual("Asus", testLaptop.Make);
+            Assert.AreEqual("Zen", testPc.Make);
+            Assert.AreEqual("Iphone", testPhone.Make);
         }
 
         [Test]
-        public void Test_Constructor_Exception()
+        public void Test_Constructor_Make_Null() //testWhiteSpace
         {
-            Assert.Throws<ArgumentException>(() => new Phone(null));
-            Assert.Throws<ArgumentException>(() => new PC(null));
-            Assert.Throws<ArgumentException>(() => new Laptop(null));
-            Assert.Throws<ArgumentException>(() => new Phone(string.Empty));
-            Assert.Throws<ArgumentException>(() => new PC(string.Empty));
-            Assert.Throws<ArgumentException>(() => new Laptop(string.Empty));
+            Assert.Throws<ArgumentException>(() => this.testLaptop = new Laptop(null));
         }
 
         [Test]
-        public void Test_Add_Exception()
+        public void Test_Add_Part()
         {
-            Part phonepart = new PhonePart("usb", 90);
-            Part pcpart = new PCPart("disk", 90);
-            Part laptoppart = new LaptopPart("Motherboard", 90);
-
-            laptop.AddPart(laptoppart);
-            pc.AddPart(pcpart);
-            phone.AddPart(phonepart);
-
-            Assert.That(() => laptop.AddPart(laptoppart), Throws.InvalidOperationException);
-            Assert.That(() => pc.AddPart(pcpart), Throws.InvalidOperationException);
-            Assert.That(() => phone.AddPart(phonepart), Throws.InvalidOperationException);
+            this.testPc.AddPart(testPcPart);
+            var addedPart = testPc.Parts.FirstOrDefault(x => x.Name == testPcPart.Name);
+            Assert.NotNull(addedPart);
+            Assert.AreEqual(testPcPart.Name, addedPart.Name);
+            Assert.That(testPc.Parts, Has.Member(testPcPart));
+            Assert.AreEqual(1, testPc.Parts.Count);
         }
 
         [Test]
-        public void Test_Add_Valid()
+        public void Test_Add_Not_Correct_Part_For_Laptop_Exception()
         {
-            Part phonepart = new PhonePart("usb", 90);
-            Part pcpart = new PCPart("disk", 90);
-            Part laptoppart = new LaptopPart("Motherboard", 90);
-
-            laptop.AddPart(laptoppart);
-            pc.AddPart(pcpart);
-            phone.AddPart(phonepart);
-
-            Assert.AreEqual(1, phone.Parts.Count);
-            Assert.AreEqual(1, laptop.Parts.Count);
-            Assert.AreEqual(1, pc.Parts.Count);
+            Assert.Throws<InvalidOperationException>(() => this.testLaptop.AddPart(this.testPcPart));
         }
 
         [Test]
-        public void Test_Remove_Exception()
+        public void Test_Add_Not_Correct_Part_For_PC_Exception()
         {
-            Assert.That(() => pc.RemovePart(null), Throws.ArgumentException);
-            Assert.That(() => laptop.RemovePart(null), Throws.ArgumentException);
-            Assert.That(() => phone.RemovePart(null), Throws.ArgumentException);
+            Assert.Throws<InvalidOperationException>(() => this.testPc.AddPart(this.testPhonePart));
         }
 
         [Test]
-        public void Test_Remove_Exception_Empty()
+        public void Test_Add_Not_Correct_Part_For_Phone_Exception()
         {
-            Assert.That(() => pc.RemovePart(string.Empty), Throws.ArgumentException);
-            Assert.That(() => laptop.RemovePart(string.Empty), Throws.ArgumentException);
-            Assert.That(() => phone.RemovePart(string.Empty), Throws.ArgumentException);
+            Assert.Throws<InvalidOperationException>(() => this.testPhone.AddPart(this.testLaptopPart));
         }
 
         [Test]
-        public void Test_Remove_Second_Exception()
+        public void Test_Add_Part_Exception()
         {
-            Assert.That(() => pc.RemovePart("InvalidPart"), Throws.InvalidOperationException);
-            Assert.That(() => laptop.RemovePart("InvalidPart"), Throws.InvalidOperationException);
-            Assert.That(() => phone.RemovePart("InvalidPart"), Throws.InvalidOperationException);
+            this.testPc.AddPart(testPcPart);
+            Assert.Throws<InvalidOperationException>(() => this.testPc.AddPart(testPcPart));
         }
 
         [Test]
-        public void Test_Remove_Valid()
+        public void Test_Remove_Part()
         {
-            Part phonepart = new PhonePart("usb", 90);
-            Part pcpart = new PCPart("disk", 90);
-            Part laptoppart = new LaptopPart("Motherboard", 90);
-            laptop.AddPart(laptoppart);
-            pc.AddPart(pcpart);
-            phone.AddPart(phonepart);
-
-            laptop.RemovePart("Motherboard");
-            pc.RemovePart("disk");
-            phone.RemovePart("usb");
-            Assert.AreEqual(0,phone.Parts.Count);
-            Assert.AreEqual(0,pc.Parts.Count);
-            Assert.AreEqual(0,laptop.Parts.Count);
+            this.testPc.AddPart(new PCPart("HDD", 20));
+            this.testPc.AddPart(new PCPart("CPU", 90));
+            this.testPc.AddPart(new PCPart("GPU", 130));
+            var partToRemove = testPc.Parts.FirstOrDefault(x => x.Name == "HDD");
+            Assert.NotNull(partToRemove);
+            this.testPc.RemovePart("HDD");
+            Assert.AreEqual(2, this.testPc.Parts.Count);
         }
 
         [Test]
-        public void Test_Repair_Exception()
+        public void Test_Remove_Part_Exception_Null()
         {
-            Assert.That(() => laptop.RepairPart(null), Throws.ArgumentException);
-            Assert.That(() => pc.RepairPart(null), Throws.ArgumentException);
-            Assert.That(() => phone.RepairPart(null), Throws.ArgumentException);
+            Assert.Throws<ArgumentException>(() => this.testPc.RemovePart(null));
         }
 
         [Test]
-        public void Test_Repair_Exception_WhiteSpace()
+        public void Test_Remove_Part_Exception_Empty()
         {
-            Assert.That(() => laptop.RepairPart(string.Empty), Throws.ArgumentException);
-            Assert.That(() => pc.RepairPart(string.Empty), Throws.ArgumentException);
-            Assert.That(() => phone.RepairPart(string.Empty), Throws.ArgumentException);
+            Assert.Throws<ArgumentException>(() => this.testPc.RemovePart(string.Empty));
         }
 
         [Test]
-        public void Test_Repair_InvalidPart()
+        public void Test_Remove_Part_Exception_DoesNotExist()
         {
-            Assert.That(() => laptop.RepairPart("InvalidPart"), Throws.InvalidOperationException);
-            Assert.That(() => pc.RepairPart("InvalidPart"), Throws.InvalidOperationException);
-            Assert.That(() => phone.RepairPart("InvalidPart"), Throws.InvalidOperationException);
+            Assert.Throws<InvalidOperationException>(() => this.testPc.RemovePart("InvalidPart123"));
         }
 
         [Test]
-        public void Test_Repair_Unbroken_Part()
+        public void Test_Repair_Part()
         {
-            Part phonepart = new PhonePart("usb", 90);
-            Part pcpart = new PCPart("disk", 90);
-            Part laptoppart = new LaptopPart("Motherboard", 90);
-            laptop.AddPart(laptoppart);
-            pc.AddPart(pcpart);
-            phone.AddPart(phonepart);
-            Assert.That(() => phone.RepairPart("usb"), Throws.InvalidOperationException);
-            Assert.That(() => pc.RepairPart("disk"), Throws.InvalidOperationException);
-            Assert.That(() => laptop.RepairPart("Motherboard"), Throws.InvalidOperationException);
+            this.testPc.AddPart(new PCPart("HDD", 20, true));
+            this.testPc.AddPart(new PCPart("CPU", 90, true));
+            this.testPc.AddPart(new PCPart("GPU", 130, true));
+            Assert.AreEqual(3, testPc.Parts.Count);
+
+            var partToRepair = testPc.Parts.FirstOrDefault(x => x.Name == "HDD");
+            Assert.NotNull(partToRepair);
+
+            this.testPc.RepairPart("HDD");
+            Assert.AreEqual(false, partToRepair.IsBroken); //check here if breaks
         }
 
         [Test]
-        public void Test_Repair_Valid()
+        public void Test_Repair_Part_Exception_Null()
         {
-            Part phonepart = new PhonePart("usb", 90, true);
-            Part pcpart = new PCPart("disk", 90, true);
-            Part laptoppart = new LaptopPart("Motherboard", 90, true);
+            Assert.Throws<ArgumentException>(() => this.testPc.RepairPart(null));
+        }
 
-            laptop.AddPart(laptoppart);
-            pc.AddPart(pcpart);
-            phone.AddPart(phonepart);
+        [Test]
+        public void Test_Repair_Part_Exception_Empty()
+        {
+            Assert.Throws<ArgumentException>(() => this.testPc.RepairPart(string.Empty));
+        }
 
-            laptop.RepairPart("Motherboard");
-            pc.RepairPart("disk");
-            phone.RepairPart("usb");
+        [Test]
+        public void Test_Repair_Part_Exception_Invalid_Part()
+        {
+            Assert.Throws<InvalidOperationException>(() => this.testPc.RepairPart("InvalidPart123"));
+        }
 
-            Assert.AreEqual(false, phonepart.IsBroken);
-            Assert.AreEqual(false, pcpart.IsBroken);
-            Assert.AreEqual(false, laptoppart.IsBroken);
+        [Test]
+        public void Test_Repair_Part_Exception_NotBrokenPart()
+        {
+            this.testPc.AddPart(new PCPart("HDD", 20, false));
+            this.testPc.AddPart(new PCPart("CPU", 130, false));
+            Assert.Throws<InvalidOperationException>(() => this.testPc.RepairPart("HDD"));
         }
     }
 }

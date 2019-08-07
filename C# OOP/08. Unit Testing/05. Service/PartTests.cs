@@ -1,87 +1,87 @@
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
 namespace Tests
 {
-    [TestFixture]
     public class PartTests
     {
-        private LaptopPart laptopPart1;
-        private LaptopPart laptopPart2;
-        private PCPart pCPart1;
-        private PCPart pCPart2;
-        private PhonePart phonePart1;
-        private PhonePart phonePart2;
-
+        private Part phonepart;
+        private Part pcpart;
+        private Part laptoppart;
         [SetUp]
         public void Setup()
         {
-            this.laptopPart1 = new LaptopPart("LaptopPartName1", 10);
-            this.laptopPart2 = new LaptopPart("LaptopPartName2", 20, true);
-
-            this.pCPart1 = new PCPart("PCPartName1", 10);
-            this.pCPart2 = new PCPart("PCPartName2", 20, true);
-
-            this.phonePart1 = new PhonePart("PhonePartName1", 10);
-            this.phonePart2 = new PhonePart("PhonePartName2", 20, true);
+            phonepart = new PhonePart("usb", 90);
+            pcpart = new PCPart("disk", 90);
+            laptoppart = new LaptopPart("Motherboard", 90);
         }
 
         [Test]
-        public void Test_First_Constructure()
+        public void Test_Constructor()
         {
-            Assert.AreEqual("LaptopPartName1", this.laptopPart1.Name);
-            Assert.AreEqual(15, this.laptopPart1.Cost);
-            Assert.AreEqual(false, this.laptopPart1.IsBroken);
+          Part newphonepart = new PhonePart("usb", 90, true);
+          Part newpcpart = new PCPart("disk", 90, true);
+          Part newlaptoppart = new LaptopPart("Motherboard", 90, true);
 
-            Assert.AreEqual("PCPartName1", this.pCPart1.Name);
-            Assert.AreEqual(12, this.pCPart1.Cost);
-            Assert.AreEqual(false, this.pCPart1.IsBroken);
-
-            Assert.AreEqual("PhonePartName1", this.phonePart1.Name);
-            Assert.AreEqual(13, this.phonePart1.Cost);
-            Assert.AreEqual(false, this.phonePart1.IsBroken);
-        }
-
-        [Test]
-        public void Test_Second_Constructure()
-        {
-            Assert.AreEqual("LaptopPartName2", this.laptopPart2.Name);
-            Assert.AreEqual(30, this.laptopPart2.Cost);
-            Assert.AreEqual(true, this.laptopPart2.IsBroken);
-
-            Assert.AreEqual("PCPartName2", this.pCPart2.Name);
-            Assert.AreEqual(24, this.pCPart2.Cost);
-            Assert.AreEqual(true, this.pCPart2.IsBroken);
-
-            Assert.AreEqual("PhonePartName2", this.phonePart2.Name);
-            Assert.AreEqual(26, this.phonePart2.Cost);
-            Assert.AreEqual(true, this.phonePart2.IsBroken);
+          Assert.AreEqual("usb", newphonepart.Name);
+          Assert.AreEqual(90 * 1.3m, newphonepart.Cost);
+          Assert.AreEqual("disk", newpcpart.Name);
+          Assert.AreEqual(90 * 1.2m, newpcpart.Cost);
+          Assert.AreEqual("Motherboard", newlaptoppart.Name);
+          Assert.AreEqual(90 * 1.5m, newlaptoppart.Cost);
+          Assert.AreEqual(true, newphonepart.IsBroken);
+          Assert.AreEqual(true, newlaptoppart.IsBroken);
+          Assert.AreEqual(true, newpcpart.IsBroken);
         }
 
         [Test]
         public void Test_Name_Exception()
         {
-            Assert.Throws<ArgumentException>(() => new PhonePart(null, 10));
+            Assert.That(() => new PhonePart(null, 90), Throws.ArgumentException);
+            Assert.That(() => new PCPart(null, 90), Throws.ArgumentException);
+            Assert.That(() => new LaptopPart(null, 90), Throws.ArgumentException);
+            Assert.That(() => new PhonePart(string.Empty, 90), Throws.ArgumentException);
+            Assert.That(() => new PCPart(string.Empty, 90), Throws.ArgumentException);
+            Assert.That(() => new LaptopPart(string.Empty, 90), Throws.ArgumentException);
         }
 
         [Test]
         public void Test_Cost_Exception()
         {
-            Assert.Throws<ArgumentException>(() => new PhonePart("Name", 0));
+            Assert.That(() => new PhonePart("valid", 0), Throws.ArgumentException);
+            Assert.That(() => new PCPart("valid2", -2), Throws.ArgumentException);
+            Assert.That(() => new LaptopPart("valid3", -3), Throws.ArgumentException);
+        }
+
+        [Test]
+        public void Test_IsBroken_True()
+        {
+            var newPhonePart = new PhonePart("valid", 2, true);
+            Assert.AreEqual(true, newPhonePart.IsBroken);
+        }
+
+        [Test]
+        public void Test_IsBroken_False()
+        {
+            var newPhonePart = new PhonePart("valid", 3, false);
+            Assert.AreEqual(false, newPhonePart.IsBroken);
         }
 
         [Test]
         public void Test_Repair()
         {
-            this.laptopPart2.Repair();
-            Assert.AreEqual(false, this.laptopPart2.IsBroken);
+            var newPhonePart = new PhonePart("valid", 2, true);
+            newPhonePart.Repair();
+            Assert.AreEqual(false, newPhonePart.IsBroken);
         }
 
         [Test]
         public void Test_Report()
         {
-            Assert.AreEqual($"LaptopPartName1 - 15.00$" + Environment.NewLine + $"Broken: False",
-                this.laptopPart1.Report());
+            var newPhonePart = new PhonePart("valid", 2, true);
+            string report = $"{newPhonePart.Name} - {newPhonePart.Cost:f2}$" + Environment.NewLine +
+                $"Broken: {newPhonePart.IsBroken}";
+            Assert.AreEqual(report, newPhonePart.Report());
         }
     }
 }
