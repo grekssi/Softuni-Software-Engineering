@@ -1,4 +1,9 @@
-<h1 align="center">Online courses from the Software University in Sofia, Bulgaria</h1>
+<h1 align="center">Udemy Online Courses</h1>
+<a rel="nofollow">  <img src="https://user-images.githubusercontent.com/25712677/62918560-9eed0680-bda8-11e9-8bc9-ea31e79b59de.png" alt="Udemy Logo" title="Logo Title Text 2" data-canonical-src="http://innovationstarterbox.bg/wp-content/uploads/2016/05/Softuni_logo_trasparent.png" style="max-width:100%;"> </a>
+<br>
+<br>
+<br>
+<h1 align="center">Software University Sofia, Software Engineering Program</h1>
 <a href="https://softuni.bg/trainings/courses" rel="nofollow">  <img src="https://user-images.githubusercontent.com/25712677/62917989-043ff800-bda7-11e9-80b2-ece7e3f42317.png" alt="SoftUni logo" title="Logo Title Text 2" data-canonical-src="http://innovationstarterbox.bg/wp-content/uploads/2016/05/Softuni_logo_trasparent.png" style="max-width:100%;"> </a>
 <br>
 <br>
