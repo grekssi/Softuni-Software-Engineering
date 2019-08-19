@@ -27,7 +27,7 @@
 </tr>
 <tr>
 <td><a href="https://softuni.bg/trainings/2349/csharp-oop-june-2019" rel="nofollow"> C# OOP</a></td>
-<td><a href="" rel="nofollow"> TBD</a></td>
+<td><a href="https://softuni.bg/certificates/details/69835/2ac84933" rel="nofollow"> Link</a></td>
 </tr>
 <tr>
 <td><a href="https://softuni.bg/trainings/1747/databases-basics-mssql-server-september-2017/internal" rel="nofollow"> Databases Basics - MS SQL Server </a></td>
