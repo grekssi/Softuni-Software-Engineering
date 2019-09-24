@@ -1,0 +1,64 @@
+CREATE TABLE Directors (
+	Id int NOT NULL IDENTITY,
+	DirectorName nvarchar(200) NOT NULL UNIQUE,
+	Notes nvarchar(max),
+	PRIMARY KEY (Id)
+)
+
+CREATE TABLE Genres (
+	Id int NOT NULL IDENTITY,
+	GenreName nvarchar(200) NOT NULL UNIQUE,
+	Notes nvarchar(max),
+	PRIMARY KEY (Id)
+)
+
+CREATE TABLE Categories (
+	Id int NOT NULL IDENTITY,
+	CategoryName nvarchar(200) NOT NULL UNIQUE,
+	Notes nvarchar(max),
+	PRIMARY KEY (Id)
+)
+
+create table Movies(
+    Id int identity(1,1) not null,
+    Title nvarchar(50) not null unique ,
+    DirectorId int not null,
+    CopyrightYear int not null,
+    Length int not null,
+    GenreId int not null,
+    CategoryId int not null,
+    Rating numeric(2, 1),
+    Notes NVARCHAR(MAX),
+    constraint PK_Movies primary key(Id),
+    constraint PK_MovieDirectorId foreign key (DirectorId) references Directors(Id),
+    constraint PK_MovieGenreId foreign key (GenreId) references Genres(Id),
+    constraint PK_MovieCategoryId foreign key (CategoryId) references Categories(Id),
+    constraint PK_Rating check(Rating > 0 and Rating <= 10),
+    constraint PK_Length check(Length > 0),
+    constraint PK_CopyrightYear check(CopyrightYear > 1900)
+
+)
+
+INSERT INTO Directors (DirectorName, Notes)
+VALUES
+	('ßâîð Ãúðäåâ', 'Èçêëþ÷èòåëåí áúëãàðñêè ðåæèñüîð'),
+	('Christopher Nolan', 'Best known for his cerebral, often nonlinear story-telling'),
+	('Susanne Bier', 'Known for In a Better World (2010), After the Wedding (2006) and Brothers (2004).'),
+	('Kathryn Bigelow', 'Director of The Hurt Locker'),
+	('Ridley Scott', 'His reputation remains solidly intact.')
+
+INSERT INTO Genres (GenreName)
+VALUES
+	('Drama'),('History'),('Thriller'),('Romance'),('Sci-Fi')
+
+	INSERT INTO Categories (CategoryName)
+VALUES
+	('R'),('PG-13'),('PG-18'),('Avoid at all cost'),('Hmmmm')
+
+INSERT INTO Movies (Title, DirectorId, CopyrightYear, Length, GenreId, CategoryId, Rating, Notes)
+VALUES
+	('Gladiator', 5, 2000, 155, 1, 1, 8.5, NULL),
+	('The Prestige', 2, 2006, 130, 5, 2, 8.5, 'One of my favourite movies'),
+	('The Hurt Locker', 4, 2008, 131, 3, 1, 7.6, NULL),
+	('After the Wedding', 3, 2006, 155, 1, 1, 7.8, 'Amazing performance from everyone'),
+	('Äçèôò', 1, 2008, 120, 1, 1, 7.4, NULL)
