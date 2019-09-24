@@ -1,0 +1,126 @@
+CREATE TABLE Employees(
+    Id int not null identity ,
+    FirstName varchar(30) not null,
+    LastName varchar(30) not null,
+    Notes nvarchar(MAX),
+    PRIMARY KEY (Id)
+)
+
+INSERT INTO Employees(FirstName, LastName, Notes)
+VALUES
+('Kiro', 'Mecha', null),
+('Maria', 'Dobreva', null),
+('Mincho', 'Kerev', null)
+
+CREATE TABLE Customers(
+    AccountNumber int identity primary key,
+    FirstName varchar(50) not null,
+    LastName varchar(50) not null,
+    PhoneNumber int not null,
+    EmergencyName varchar(50) not null,
+    EmergencyNumber int not null,
+    Notes nvarchar(MAX),
+)
+
+INSERT INTO Customers(FirstName, LastName, PhoneNumber, EmergencyName, EmergencyNumber, Notes)
+VALUES
+('Pesho', 'Peshev', 088238451, 'Klisu', 085512412, NULL),
+('Zvezvdio', 'Varna', 018540172, 'Misho', 041275122, 'Very good me like dis place'),
+('Jiko', 'Hristev', 019247512, 'Kirov', 019357801, 'Yes yes good')
+
+CREATE TABLE RoomStatus(
+    RoomStatus nvarchar(200) unique not null,
+    Notes nvarchar(MAX),
+    PRIMARY KEY (RoomStatus)
+)
+
+INSERT INTO RoomStatus( RoomStatus, Notes)
+VALUES
+('Reserved', null),
+('Occupied', null),
+('Empty', 'Good Condition')
+
+CREATE TABLE RoomTypes (
+    RoomType nvarchar(200) unique not null,
+    Notes nvarchar(MAX),
+    PRIMARY KEY (RoomType)
+)
+
+INSERT INTO RoomTypes (RoomType)
+VALUES
+('Single'),
+('Double'),
+('Suite')
+
+CREATE TABLE BedTypes (
+	BedType nvarchar(200) NOT NULL UNIQUE,
+	Notes nvarchar(max),
+	PRIMARY KEY (BedType)
+)
+
+INSERT INTO BedTypes (BedType)
+VALUES
+('Single'),
+('Twin'),
+('Double')
+
+CREATE TABLE Rooms (
+    RoomNumber INT IDENTITY primary key ,
+    RoomType nvarchar(200) foreign key references RoomTypes(roomtype),
+    BedType nvarchar(200) foreign key references BedTypes(BedType),
+    Rate INT NOT NULL CHECK (Rate > 0 AND Rate <= 10),
+    RoomStatus nvarchar(200) foreign key references RoomStatus(RoomStatus),
+    Notes nvarchar(MAX)
+)
+
+INSERT INTO Rooms (RoomType, BedType, Rate, RoomStatus, Notes)
+VALUES
+('Double', 'Double', 10, 'Empty', 'Good condition'),
+('Single', 'Single', 8, 'Occupied', NULL),
+('Suite', 'Twin', 5, 'Reserved', NULL)
+
+CREATE TABLE Payments(
+    Id int identity primary key,
+    EmployeeId int not null foreign key references Employees(Id),
+    PaymentDate date not null,
+    AccountNumber int not null foreign key references Customers(AccountNumber),
+    FirstDateOccupied date not null,
+    LastDateOccupied date not null,
+    TotalDays int not null,
+    AmountCharged money not null,
+    TaxRate money not null,
+    TaxAmount money not null,
+    PaymentTotal money not null,
+    Notes nvarchar(MAX),
+    CHECK (PaymentTotal = AmountCharged + TaxAmount),
+    check(TaxAmount = AmountCharged * TaxRate),
+    check(TotalDays = DATEDIFF(day, FirstDateOccupied, LastDateOccupied))
+)
+
+INSERT INTO Payments (EmployeeId, PaymentDate, AccountNumber, FirstDateOccupied, LastDateOccupied, TotalDays, AmountCharged, TaxRate, TaxAmount, PaymentTotal)
+VALUES
+	(1, '2017-01-22', 1, '2017-01-21', '2017-01-22', 1, 100, 0.20, 20, 120),
+	(1, '2017-01-22', 2, '2017-01-20', '2017-01-22', 2, 200, 0.20, 40, 240),
+	(1, '2017-01-22', 3, '2017-01-19', '2017-01-22', 3, 300, 0.20, 60, 360)
+
+CREATE TABLE Occupancies (
+	Id int IDENTITY,
+	EmployeeId int NOT NULL,
+	DateOccupied date NOT NULL,
+	AccountNumber int NOT NULL,
+	RoomNumber int NOT NULL,
+	RateApplied money NOT NULL,
+	PhoneCharge money NOT NULL DEFAULT 0,
+	Notes nvarchar(max),
+	PRIMARY KEY (Id),
+	FOREIGN KEY (EmployeeId) REFERENCES Employees (Id),
+	FOREIGN KEY (AccountNumber) REFERENCES Customers (AccountNumber),
+	FOREIGN KEY (RoomNumber) REFERENCES Rooms (RoomNumber),
+	CHECK (PhoneCharge >= 0)
+)
+
+INSERT INTO Occupancies (EmployeeId, DateOccupied, AccountNumber, RoomNumber, RateApplied, PhoneCharge)
+VALUES
+	(1, '2014-01-22', 1, 1, 70, 0),
+	(2, '2014-01-22', 2, 2, 100, 0),
+	(3, '2014-01-22', 3, 3, 110, 10)
