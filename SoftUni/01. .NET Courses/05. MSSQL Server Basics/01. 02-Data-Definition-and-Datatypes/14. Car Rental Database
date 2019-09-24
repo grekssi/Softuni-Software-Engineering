@@ -1,0 +1,104 @@
+CREATE table Categories(
+    Id int identity unique,
+    CategoryName varchar(50) not null,
+    DailyRate money,
+    WeeklyRate money,
+    MonthlyRate money,
+    WeekendRate money,
+    constraint PK_IdConstraint primary key(Id)
+)
+
+INSERT INTO Categories(CategoryName, DailyRate, WeeklyRate, MonthlyRate, WeekendRate)
+VALUES
+('Economy', 15, 40, 100, 10),
+('Standard', 15, 40, 100, 10),
+('Premium', 15, 40, 100, 10)
+
+CREATE TABLE Cars(
+    Id int identity not null,
+    PlateNumber varchar(10) not null,
+    Manufacturer varchar(50) not null,
+    Model varchar(50) not null,
+    CarYear int not null ,
+    CategoryId int not null,
+    Doors int not null,
+    Picture varbinary(MAX) not null,
+    Condition varchar(MAX) not null,
+    Available bit,
+    primary key(Id),
+    constraint CY_CarYear check(CarYear >= 1900),
+    constraint FK_CategoryId foreign key (CategoryId) references Categories(Id),
+    constraint DC_Doord check (Doors > 0 and Doors <= 5),
+)
+
+
+INSERT INTO Cars(PlateNumber, Manufacturer, Model, CarYear, CategoryId, Doors, Picture, Condition, Available)
+VALUES
+('PB1234TX', 'Toyota', 'TUNDRA', 1992, 2, 5, 0101010, 'Normal', 1),
+('CB5233KH', 'BMW', 'E46', 2003, 1, 3, 1101010, 'Excellent', 0),
+('PB3942TX', 'Opel', 'Insignia', 2007, 1, 5, 0101111, 'Perfect', 1)
+
+
+CREATE TABLE Employees(
+    Id int identity,
+    FirstName varchar(30) not null,
+    LastName varchar(30) not null,
+    Title varchar(100) not null,
+    Notes nvarchar(MAX),
+    constraint PK_EmployeeId primary key(Id)
+)
+
+INSERT INTO Employees(FirstName, LastName, Title, Notes)
+VALUES
+('Vladimir', 'Putin', 'Senior', NULL),
+('Stoiko', 'Minchev', 'Junior', 'BestInB1Zn3s5'),
+('Kiro', 'Kirov', 'Mid', NULL)
+
+CREATE TABLE Customers (
+	Id int NOT NULL IDENTITY,
+	DriverLicenceNumber varchar(200) NOT NULL,
+	FullName nvarchar(200) NOT NULL,
+	Address nvarchar(max) NOT NULL,
+	City nvarchar(200) NOT NULL,
+	ZIPCode varchar(50) NOT NULL,
+	Notes nvarchar(max),
+	PRIMARY KEY (Id)
+)
+
+INSERT INTO Customers (DriverLicenceNumber, FullName, Address, City, ZIPCode, Notes)
+VALUES
+	('A111111', 'Angela MErkel', 'Willy-Brandt-Strasse 1', 'Berlin', '10557', 'New leader of the free world'),
+	('B222222', 'Barack Obama', '1600 Pennsylvania Ave NW', 'Washington', 'DC 20500', 'Previous leader of the free world'),
+	('C333333', 'Bill Clinton', '555 Bloomberg Avenue', 'New York', 'NY 1000', NULL)
+
+Create table RentalOrders(
+    Id int identity,
+    EmployeeId int not null ,
+    CustomerId int not null ,
+    CarId int not null ,
+    TankLevel float not null ,
+    KilometrageStart float not null,
+    KilometrageEnd float not null,
+    TotalKilometrage float not null,
+    StartDate date not null ,
+    EndDate date not null,
+    TotalDays int not null,
+    RateApplied money not null,
+    TaxRate money not null,
+    OrderStatus nvarchar(200) not null ,
+    Notes NVARCHAR(200),
+    PRIMARY KEY (Id),
+    FOREIGN KEY (EmployeeId) references Employees(Id),
+    FOREIGN KEY (CustomerId) references Customers(Id),
+    FOREIGN KEY (CarId) references Cars(Id),
+    CHECK (TotalKilometrage = KilometrageEnd - KilometrageStart),
+    CHECK (TotalDays = DATEDIFF(day, StartDate, EndDate) + 1)
+)
+
+
+INSERT INTO RentalOrders(EmployeeId, CustomerId, CarId, TankLevel, KilometrageStart, KilometrageEnd,
+                         TotalKilometrage, StartDate, EndDate, TotalDays, RateApplied, TaxRate, OrderStatus, Notes)
+VALUES
+(1, 1, 1, 100, 30100, 30200.5, 100.5, '2017-01-22', '2017-01-22', 1, 15, 0.20, 'Rented', NULL),
+(2, 2, 2, 100, 30100, 30250.5, 150.5, '2017-01-20', '2017-01-22', 3, 80, 0.20, 'Pending', 'TBD'),
+(3, 3, 3, 100, 30000, 30200.5, 200.5, '2017-01-21', '2017-01-22', 2, 110, 0.20, 'Closed', NULL)
