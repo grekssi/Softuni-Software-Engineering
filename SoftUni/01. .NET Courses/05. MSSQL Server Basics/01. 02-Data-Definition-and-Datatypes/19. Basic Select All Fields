@@ -1,0 +1,3 @@
+Select * FROM Towns
+Select * FROM Departments
+SELECT * FROM Employees
